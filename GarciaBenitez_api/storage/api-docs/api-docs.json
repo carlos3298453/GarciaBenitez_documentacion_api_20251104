@@ -1,0 +1,634 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentacion de API de Rafael Angel Aquino Hernández",
+        "description": "API desarrollada por Rafael Angel Aquino Hernández, para la universidad UFG",
+        "contact": {
+            "email": "ia.rafaelhernandez@ufg.edu.sv"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/",
+            "description": "Servidor local de desarrollo"
+        },
+        {
+            "url": "http://testing.ejemplo.com/",
+            "description": "Servidor local para pruebas"
+        },
+        {
+            "url": "http://msgv.ejemplo.com/",
+            "description": "Servidor local de produccion"
+        }
+    ],
+    "paths": {
+        "/api/zonas": {
+            "get": {
+                "tags": [
+                    "Zona"
+                ],
+                "summary": "Obtener toda las zonas registradas",
+                "description": "Devuelve todas las zonas registradas en la tabla zona de la base de datos, no requiere parámetros",
+                "operationId": "obtenerZonas",
+                "responses": {
+                    "200": {
+                        "description": "Zonas devueltas satisfactoriamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Valores encontrados"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id_zona": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_pais": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "nombre_zona": {
+                                                        "type": "string",
+                                                        "example": "Zona Occidental"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 200
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "4"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron valores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "No se han encontrado valores"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 404
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": "La base de datos no devolvió registros"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "0"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/zona/{idzona}": {
+            "get": {
+                "tags": [
+                    "Zona"
+                ],
+                "summary": "Obtener una zona en específico",
+                "description": "Devuelve únicamente el registro de una zona en específico, de acuerdo al parámetro que ha sido enviado en la URL",
+                "operationId": "obtenerZona",
+                "parameters": [
+                    {
+                        "name": "idzona",
+                        "in": "path",
+                        "description": "Buscar por id de zona",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Zona devuelta satisfactoriamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Valores encontrados"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id_zona": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_pais": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "nombre_zona": {
+                                                        "type": "string",
+                                                        "example": "Zona Occidental"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 200
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron valores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "No se han encontrado valores"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 404
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": "La base de datos no devolvió registros"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "0"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/zonaspais/{idpais}": {
+            "get": {
+                "tags": [
+                    "Zona"
+                ],
+                "summary": "Obtener todas las zonas de un país",
+                "description": "Devuelve todos los registros de zonas que le pertenecen a un país específico, se requiere envío del id de país como parámetro",
+                "operationId": "obtenerZonaPais",
+                "parameters": [
+                    {
+                        "name": "idpais",
+                        "in": "path",
+                        "description": "Buscar por id de pais",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Zonas devueltas satisfactoriamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Valores encontrados"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id_zona": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "id_pais": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "nombre_zona": {
+                                                        "type": "string",
+                                                        "example": "Zona Occidental"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 200
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontraron valores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "No se han encontrado valores"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 404
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": "La base de datos no devolvió registros"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "0"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parámetro no enviado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "No se ha enviado un parámetro obligatorio"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 400
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": "El identificador de país está vacío"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "0"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/nuevazona": {
+            "post": {
+                "tags": [
+                    "Zona"
+                ],
+                "summary": "Create una nueva zona",
+                "description": "Create el registro de una nueva zona específica para un país, de acuerdo a valores enviados.",
+                "operationId": "crearZona",
+                "requestBody": {
+                    "description": "Creación de una nueva zona geográfica",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "idpais",
+                                    "nombrezona"
+                                ],
+                                "properties": {
+                                    "idpais": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "nombrezona": {
+                                        "type": "string",
+                                        "example": "Zona de prueba"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Se ha creado el registro de zona satisfactoriamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Se guardaron los datos correctamente"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id_zona": {
+                                                        "type": "integer",
+                                                        "example": 4
+                                                    },
+                                                    "id_pais": {
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    },
+                                                    "nombre_zona": {
+                                                        "type": "string",
+                                                        "example": "Zona de prueba"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 200
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": ""
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Hubo un problema interno",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 500
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Hubo un problema al guardar los datos"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer",
+                                                        "example": 500
+                                                    },
+                                                    "msg": {
+                                                        "type": "string",
+                                                        "example": "No se pudo hacer insert a la tabla"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer",
+                                            "example": "0"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Zona",
+            "description": "Zona"
+        }
+    ]
+}
